@@ -67,6 +67,11 @@ public class Modelo {
 	{
 		return (Integer) datos.eliminar(dato);
 	}
+	
+	public IArregloDinamico darDatos()
+	{
+		return datos;
+	}
 
 
 }

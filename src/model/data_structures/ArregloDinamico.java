@@ -37,6 +37,8 @@ public class ArregloDinamico  <T extends Comparable<T>> implements IArregloDinam
                tamanoAct = 0;
                
         }
+		
+		
         
 		public void agregar( T dato )
         {
@@ -79,7 +81,7 @@ public class ArregloDinamico  <T extends Comparable<T>> implements IArregloDinam
             	T objeto= (T) elementos[i];
              	 if (  dato.compareTo(objeto)==0)
              	 {
-             		 respuesta=objeto;
+             		respuesta=objeto;
              		parar=true;
              	 }
             } 
