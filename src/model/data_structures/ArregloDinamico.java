@@ -65,9 +65,9 @@ public class ArregloDinamico  <T extends Comparable<T>> implements IArregloDinam
 		}
 		else
 		{
-			for(int i=1; i<tamanoAct-1;i++)
+			for(int i=tamanoAct; i>0;i--)
 			{
-				elementos[i]= elementos[i+1];
+				elementos[i]= elementos[i-1];
 			}
 			elementos[0]=dato;
 		}
@@ -77,22 +77,28 @@ public class ArregloDinamico  <T extends Comparable<T>> implements IArregloDinam
 	
 	public void insertarElemento(T dato, int pos)
 	{
-		if(pos==0)
-		{
-			agregarPrimero(dato);
-		}
-		else if(pos==tamanoAct)
-		{
-			agregar(dato);
-		}
-		else
-		{
-			for(int i=pos+1; i<tamanoAct-1;i++)
-			{
-				elementos[i]= elementos[i+1];
-			}
-			elementos[pos]= dato;
-		}
+		
+		boolean parar=false;
+        for ( int i = 0; i < tamanoAct && parar==false; i++)
+        {
+        	T objeto= (T) elementos[i];
+         	 if (  dato.compareTo(objeto)==0)
+         	 {
+         		
+         		
+         		for (int j=tamanoAct;j>i ;j--)
+         		{
+         			
+         				elementos[j]=elementos[j-1];
+         			
+         		}
+         		
+         		elementos[i]=dato;
+         		parar=true;
+         		tamanoAct++;
+         	 }
+        } 
+		
 	}
 	
 	public void agregarUltimo(T dato)
@@ -168,20 +174,25 @@ public class ArregloDinamico  <T extends Comparable<T>> implements IArregloDinam
 	public T eliminarPrimero()
 	{
 		T primero = (T) elementos[0];
-		for(int i = 0; i < tamanoAct - 1; i++)
+		for(int i = 0; i < tamanoAct ; i++)
 		{
-			for(int j = i + 1; j < tamanoAct; j++)
+			if (i!=tamanoAct-1)
+				{
+				elementos[i]=elementos[i+1];
+				}
+			else
 			{
-				elementos[i] = elementos[j];
+				elementos[i]=null;
 			}
 		}
+		tamanoAct=tamanoAct-1;
 		return primero;
 	}
 
 	public T eliminarUltimo()
 	{
-		T ultimo = (T) elementos[tamanoAct];
-		elementos[tamanoAct] = null; 
+		T ultimo = (T) elementos[tamanoAct-1];
+		elementos[tamanoAct-1] = null; 
 		tamanoAct--;
 		return ultimo;
 	}
@@ -189,14 +200,21 @@ public class ArregloDinamico  <T extends Comparable<T>> implements IArregloDinam
 	public T eliminarElementoPosicion(int pos)
 	{
 		T eliminado = (T) elementos[pos]; 
-		for(int i = pos ; i < tamanoAct - 1; i++)
+		for(int i = pos  ; i <tamanoAct ; i++)
 		{
-			for(int j = i + 1; j < tamanoAct; j++)
+			if (i!=tamanoAct-1)
+				{
+				elementos[ji]=elementos[i+1];
+				}
+			else
 			{
-				elementos[i] = elementos[j];
-				
+				elementos[i]=null;
 			}
+				
+				
+			
 		}
+		tamanoAct=tamanoAct-1;
 		return eliminado;
 	}
 	
