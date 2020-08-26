@@ -204,7 +204,7 @@ public class ArregloDinamico  <T extends Comparable<T>> implements IArregloDinam
 		{
 			if (i!=tamanoAct-1)
 				{
-				elementos[ji]=elementos[i+1];
+				elementos[i]=elementos[i+1];
 				}
 			else
 			{
