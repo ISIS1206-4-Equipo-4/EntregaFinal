@@ -4,8 +4,6 @@ import java.lang.reflect.Array;
 
 import javax.swing.Box;
 
-import model.logic.Movies;
-
 /**
  * 2019-01-23
  * Estructura de Datos Arreglo Dinamico de Strings.
@@ -59,11 +57,13 @@ public class ArregloDinamico  <T extends Comparable<T>> implements IArregloDinam
                tamanoAct++;
        }
 
-		public int darCapacidad() {
+		public int darCapacidad() 
+		{
 			return tamanoMax;
 		}
 
-		public int darTamano() {
+		public int darTamano() 
+		{
 			return tamanoAct;
 		}
 
@@ -119,12 +119,87 @@ public class ArregloDinamico  <T extends Comparable<T>> implements IArregloDinam
              	 }
             } 
 			return respuesta;
-		
+			
 		}
-
-
-
 		
-
+		public T eliminarPrimero()
+		{
+			T primero = (T) elementos[0];
+			for(int i = 0; i < tamanoAct - 1; i++)
+			{
+				for(int j = i + 1; j < tamanoAct; j++)
+				{
+					elementos[i] = elementos[j];
+				}
+			}
+			return primero;
+		}
+	
+		public T eliminarUltimo()
+		{
+			T ultimo = (T) elementos[tamanoAct];
+			elementos[tamanoAct] = null; 
+			tamanoAct--;
+			return ultimo;
+		}
 		
+		public T eliminarElementoPosicion(int pos)
+		{
+			T eliminado = (T) elementos[pos]; 
+			for(int i = pos ; i < tamanoAct - 1; i++)
+			{
+				for(int j = i + 1; j < tamanoAct; j++)
+				{
+					elementos[i] = elementos[j];
+					
+				}
+			}
+			return eliminado;
+		}
+		
+		public T darPrimerElemento()
+		{
+			return (T) elementos[0];
+		}
+		
+		public T darUltimoElemento()
+		{
+			return (T) elementos[tamanoAct - 1];
+		}
+		
+		public boolean estaVacio()
+		{
+			boolean rta = true;
+			if(elementos[0] != null)
+			{
+				rta = false;
+			}
+			return rta;
+		}
+		
+		public int estaPresente(T elemento)
+		{
+			int rta = -1;
+			for(int i = 0; i < tamanoAct && rta == -1; i++)
+			{
+				T comparar = (T) elementos[i];
+				if(elemento.compareTo(comparar) == 0)
+				{
+					rta = i;
+				}
+			}
+			return rta; 
+		}
+		
+		public void intercambiarInfo(int i, int j)
+		{
+			T copia = (T) elementos[i];
+			elementos[i] = elementos[j];
+			elementos[j] = copia; 
+		}
+		
+		public void cambiarInfo(int i, T elemento)
+		{
+			elementos[i] = elemento; 			
+		}
 }
