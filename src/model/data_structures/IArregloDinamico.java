@@ -1,5 +1,7 @@
 package model.data_structures;
 
+import model.logic.Movies;
+
 public interface IArregloDinamico <T extends Comparable<T>> {
 
 	/**
@@ -24,7 +26,7 @@ public interface IArregloDinamico <T extends Comparable<T>> {
 	/**
 	 * Agregar un dato de forma compacta (en la primera casilla disponible) 
 	 * Caso Especial: Si el arreglo esta lleno debe aumentarse su capacidad, agregar el nuevo dato y deben quedar multiples casillas disponibles para futuros nuevos datos.
-	 * @param dato nuevo elemento
+	 * @param movies nuevo elemento
 	 */
 	public void agregar( T dato );
 		

@@ -4,6 +4,8 @@ import java.lang.reflect.Array;
 
 import javax.swing.Box;
 
+import model.logic.Movies;
+
 /**
  * 2019-01-23
  * Estructura de Datos Arreglo Dinamico de Strings.
@@ -119,6 +121,10 @@ public class ArregloDinamico  <T extends Comparable<T>> implements IArregloDinam
 			return respuesta;
 		
 		}
+
+
+
+		
 
 		
 }

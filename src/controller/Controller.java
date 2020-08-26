@@ -27,77 +27,50 @@ public class Controller {
 	{
 		Scanner lector = new Scanner(System.in);
 		boolean fin = false;
-		Integer dato = 0;
-		Integer respuesta = 0;
+		double dato = 0;
+		String respuesta = "";
 
 		while( !fin ){
 			view.printMenu();
-
+			
 			int option = lector.nextInt();
 			switch(option){
+			
 				case 1:
-					view.printMessage("--------- \nCrear Arreglo \nDar capacidad inicial del arreglo: ");
-				    int capacidad = lector.nextInt();
-				    modelo = new Modelo(capacidad); 
-				    view.printMessage("Arreglo Dinamico creado");
-				    view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
+					modelo = new Modelo(2000); 
+					modelo.cargarPeliculas();
+					view.printMessage(modelo.escribirPrimerYUltimaPelicula());
+				   break;
 
 				case 2:
-					view.printMessage("--------- \nDar cadena (simple) a ingresar: ");
-					dato = lector.nextInt();
-					modelo.agregar(dato);
-					view.printMessage("Dato agregado");
-					view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
+					view.printMessage("Nombre del director que desea buscar buenas peliculas:");
+					while(respuesta.equals(""))
+					{
+					respuesta=lector.nextLine();
+					}
+						view.printMessage("Del 1 al 10 desde que calificacion es una buena pelicula (',' son decimales):");
+						dato=lector.nextDouble();
+						view.printMessage(modelo.buenasPeliculasDirector(respuesta, dato));
+						break;	
+					
+					
 
 				case 3:
-					view.printMessage("--------- \nDar cadena (simple) a buscar: ");
-					dato = lector.nextInt();
-					respuesta = modelo.buscar(dato);
-					if ( respuesta != null)
-					{
-						view.printMessage("Dato encontrado: "+ respuesta);
-					}
-					else
-					{
-						view.printMessage("Dato NO encontrado");
-					}
-					view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
-
-				case 4:
-					view.printMessage("--------- \nDar cadena (simple) a eliminar: ");
-					dato = lector.nextInt();
-					respuesta = modelo.eliminar(dato);
-					if ( respuesta != null)
-					{
-						view.printMessage("Dato eliminado "+ respuesta);
-					}
-					else
-					{
-						view.printMessage("Dato NO eliminado");							
-					}
-					view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
-
-				case 5: 
-					view.printMessage("--------- \nContenido del Arreglo: ");
-					view.printModelo(modelo);
-					view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;	
-					
-				case 6: 
 					view.printMessage("--------- \n Hasta pronto !! \n---------"); 
 					lector.close();
 					fin = true;
-					break;	
+					break;
 
 				default: 
 					view.printMessage("--------- \n Opcion Invalida !! \n---------");
 					break;
+			
+			
 			}
+			
+			
 		}
+			
 		
 	}	
 }

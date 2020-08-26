@@ -51,4 +51,8 @@ public class TestModelo {
 		
 	}
 
+	public void testCargarPeliculas()
+	{
+		
+	}
 }

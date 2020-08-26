@@ -9,4 +9,5 @@ module T0_202020 {
 
 	requires junit;
 	requires java.desktop;
+	requires opencsv;
 }

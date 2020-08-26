@@ -1,5 +1,15 @@
 package model.logic;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+import com.opencsv.CSVParser;
+import com.opencsv.CSVParserBuilder;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
+import com.opencsv.exceptions.CsvValidationException;
+
 import model.data_structures.ArregloDinamico;
 import model.data_structures.IArregloDinamico;
 
@@ -7,6 +17,7 @@ import model.data_structures.IArregloDinamico;
  * Definicion del modelo del mundo
  *
  */
+
 public class Modelo {
 	/**
 	 * Atributos del modelo del mundo
@@ -19,6 +30,145 @@ public class Modelo {
 	public Modelo()
 	{
 		datos = new ArregloDinamico(7);
+		
+		
+	}
+	
+	public void cargarPeliculas()
+	{
+		FileReader arhcCVS=null;
+		CSVReader csvReader=null;
+		
+		FileReader arhcCVS2=null;
+		CSVReader csvReader2=null;
+		
+	
+		
+		
+		try
+		{
+			/*
+			 * arhcCVS= new FileReader("data/prueba.csv");
+			 * 
+			 */
+			arhcCVS= new FileReader("data/SmallMoviesDetailsCleaned.csv");
+			CSVParser conPuntoYComa= new CSVParserBuilder().withSeparator(';').build();
+			csvReader =new CSVReaderBuilder(arhcCVS).withCSVParser(conPuntoYComa).build();
+			
+			String[] palabra=csvReader.readNext();
+			
+			/*
+			 * arhcCVS2= new FileReader("data/prueba2.csv");
+			 * 
+			 */
+			arhcCVS2= new FileReader("data/MoviesCastingRaw-small.csv");
+			CSVParser conPuntoYComa2= new CSVParserBuilder().withSeparator(';').build();
+			csvReader2 =new CSVReaderBuilder(arhcCVS2).withCSVParser(conPuntoYComa2).build();
+			
+			String[] palabra2=csvReader2.readNext();
+			
+					
+				while ((palabra=csvReader.readNext())!=null)
+				{	
+					palabra2=csvReader2.readNext();
+					
+					int id=Integer.parseInt(palabra[0]);
+					int budget =Integer.parseInt(palabra[1]);
+					String genero=palabra[2];
+					String imbd=palabra[3];
+					String lenguajeOrignal=palabra[4];
+					String orginalTitle=palabra[5];
+					String overview=palabra[6];
+					String popularity=palabra[7];
+					String productionCompany=palabra[8];
+					String productionCountry=palabra[9];
+					String date=palabra[10];
+					int revenue=Integer.parseInt(palabra[11]);
+					int runtime=Integer.parseInt(palabra[12]);
+					String spokenLenguage=palabra[13];
+					String status=palabra[14];
+					String tagLine=palabra[15];
+					String title=palabra[16];
+					double votosPromedio=Double.parseDouble(palabra[17]);
+					int numeroVotos=Integer.parseInt(palabra[18]);
+					int pCompanyNumber=Integer.parseInt(palabra[19]);
+					int pCountryNumber=Integer.parseInt(palabra[20]);
+					int pLenguageNumber=Integer.parseInt(palabra[21]);
+					
+					String actor1=palabra2[1];
+					int generoActor1=Integer.parseInt(palabra2[2]);
+					String actor2=palabra2[3];
+					int generoActor2=Integer.parseInt(palabra2[4]);
+					String actor3=palabra2[5];
+					int generoActor3=Integer.parseInt(palabra2[6]);
+					String actor4=palabra2[7];
+					int generoActor4=Integer.parseInt(palabra2[8]);
+					String actor5=palabra2[9];
+					int generoActor5=Integer.parseInt(palabra2[10]);
+					int numeroActores=Integer.parseInt(palabra2[11]);
+					String director=palabra2[12];
+					int generoDirector=Integer.parseInt(palabra2[13]);
+					int numeroDirectores=Integer.parseInt(palabra2[14]);
+					String producer=palabra2[15];
+					int numeroProducer=Integer.parseInt(palabra2[16]);
+					String screePlay=palabra2[17];
+					String nombreEditor=palabra2[18];
+					
+					
+					Movies nuevaPelicula=new Movies(id ,0, genero,"","","","","","","",date,0,0,spokenLenguage,"","",title,votosPromedio,0,0,0,0,actor1,generoActor1,actor2,generoActor2,actor3,generoActor3,actor4,generoActor4,actor5,generoActor5,0,director,0,0,"",0,"","");
+					datos.agregar(nuevaPelicula);						
+					
+				}
+				
+				
+				
+					
+					
+		} 
+		catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (CsvValidationException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	public String escribirPrimerYUltimaPelicula()
+	{
+		String respuesta="";
+		
+			Movies primera=(Movies) datos.darElemento(0);
+			int posicionUltima=datos.darTamano()-1;
+			Movies ultima=(Movies) datos.darElemento(posicionUltima);
+			int totalPeliculas=datos.darTamano();
+			respuesta="Primera Pelicula \nTitulo: "+primera.darTitulo()+" \ndirector: "+primera.darDirector()+" \nID: "+primera.darId()+" \nGenero: "+primera.darGenero()+" \nDia de Lanzamiento: " +primera.darDate()+" \nPromedio votos: "+primera.darPromedioVotos()+" \nLenguaje: "+primera.darSpokenLenguage();
+			respuesta=respuesta+"\n\n"+"Ultima Pelicula \nTitulo: "+ultima.darTitulo()+" \ndirector: "+ultima.darDirector()+" \nID: "+ultima.darId()+" \nGenero: "+ultima.darGenero()+" \nDia de Lanzamiento: " +ultima.darDate()+" \nPromedio votos: "+ultima.darPromedioVotos()+" \nLenguaje: "+ultima.darSpokenLenguage();
+			respuesta=respuesta+"\n\nTotal Peliculas: "+totalPeliculas+"\n\n";
+		return respuesta;
+	}
+	
+	public String buenasPeliculasDirector(String nombre, double calificacion)
+	{
+		String respuesta="Peliculas buenas del director "+nombre;
+		int tamano=datos.darTamano();
+		
+		for(int i=0;i<tamano;i++)
+		{
+			Movies actual=(Movies) datos.darElemento(i);
+			if (actual.darDirector().equals(nombre)&&actual.darPromedioVotos()>=calificacion)
+			{
+				respuesta=respuesta+"\nTitulo: "+actual.darTitulo()+" \nID: "+actual.darId()+" \nGenero: "+actual.darGenero()+" \nDia de Lanzamiento: " +actual.darDate()+" \nPromedio votos: "+actual.darPromedioVotos()+" \nActor1: "+actual.darActor1()+" \nActor2: "+actual.darActor2()+" \nActor3: "+actual.darActor3()+" \nActor4: "+actual.darActor4()+" \nActor5: "+actual.darActor5()+"\n\n";
+
+				
+			}
+		}
+		
+		return respuesta;
 	}
 	
 	/**
