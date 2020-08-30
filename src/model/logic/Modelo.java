@@ -12,6 +12,7 @@ import com.opencsv.exceptions.CsvValidationException;
 
 import model.data_structures.ArregloDinamico;
 import model.data_structures.IArregloDinamico;
+import model.data_structures.ListaEncadenada;
 
 /**
  * Definicion del modelo del mundo
@@ -22,14 +23,14 @@ public class Modelo {
 	/**
 	 * Atributos del modelo del mundo
 	 */
-	private IArregloDinamico datos;
+	private ArregloDinamico datos;
 	
 	/**
 	 * Constructor del modelo del mundo con capacidad predefinida
 	 */
 	public Modelo()
 	{
-		datos = new ArregloDinamico(7);
+		datos =  new ArregloDinamico(7);
 		
 		
 	}
@@ -116,7 +117,7 @@ public class Modelo {
 					
 					
 					Movies nuevaPelicula=new Movies(id ,0, genero,"","","","","","","",date,0,0,spokenLenguage,"","",title,votosPromedio,0,0,0,0,actor1,generoActor1,actor2,generoActor2,actor3,generoActor3,actor4,generoActor4,actor5,generoActor5,0,director,0,0,"",0,"","");
-					datos.agregar(nuevaPelicula);						
+					datos.addLast(nuevaPelicula);						
 					
 				}
 				
@@ -138,28 +139,28 @@ public class Modelo {
 		
 	}
 	
-	public String escribirPrimerYUltimaPelicula()
+	public String escribirPrimerYUltimaPelicula() throws Exception
 	{
 		String respuesta="";
 		
-			Movies primera=(Movies) datos.darElemento(0);
-			int posicionUltima=datos.darTamano()-1;
-			Movies ultima=(Movies) datos.darElemento(posicionUltima);
-			int totalPeliculas=datos.darTamano();
+			Movies primera=(Movies) datos.get(0);
+			int posicionUltima=datos.size()-1;
+			Movies ultima=(Movies) datos.get(posicionUltima);
+			int totalPeliculas=datos.size();
 			respuesta="Primera Pelicula \nTitulo: "+primera.darTitulo()+" \ndirector: "+primera.darDirector()+" \nID: "+primera.darId()+" \nGenero: "+primera.darGenero()+" \nDia de Lanzamiento: " +primera.darDate()+" \nPromedio votos: "+primera.darPromedioVotos()+" \nLenguaje: "+primera.darSpokenLenguage();
 			respuesta=respuesta+"\n\n"+"Ultima Pelicula \nTitulo: "+ultima.darTitulo()+" \ndirector: "+ultima.darDirector()+" \nID: "+ultima.darId()+" \nGenero: "+ultima.darGenero()+" \nDia de Lanzamiento: " +ultima.darDate()+" \nPromedio votos: "+ultima.darPromedioVotos()+" \nLenguaje: "+ultima.darSpokenLenguage();
 			respuesta=respuesta+"\n\nTotal Peliculas: "+totalPeliculas+"\n\n";
 		return respuesta;
 	}
 	
-	public String buenasPeliculasDirector(String nombre, double calificacion)
+	public String buenasPeliculasDirector(String nombre, double calificacion) throws Exception
 	{
 		String respuesta="Peliculas buenas del director "+nombre;
-		int tamano=datos.darTamano();
+		int tamano=datos.size();
 		
 		for(int i=0;i<tamano;i++)
 		{
-			Movies actual=(Movies) datos.darElemento(i);
+			Movies actual=(Movies) datos.get(i);
 			if (actual.darDirector().equals(nombre)&&actual.darPromedioVotos()>=calificacion)
 			{
 				respuesta=respuesta+"\nTitulo: "+actual.darTitulo()+" \nID: "+actual.darId()+" \nGenero: "+actual.darGenero()+" \nDia de Lanzamiento: " +actual.darDate()+" \nPromedio votos: "+actual.darPromedioVotos()+" \nActor1: "+actual.darActor1()+" \nActor2: "+actual.darActor2()+" \nActor3: "+actual.darActor3()+" \nActor4: "+actual.darActor4()+" \nActor5: "+actual.darActor5()+"\n\n";
@@ -180,47 +181,37 @@ public class Modelo {
 		datos = new ArregloDinamico(capacidad);
 	}
 	
-	/**
-	 * Servicio de consulta de numero de elementos presentes en el modelo 
-	 * @return numero de elementos presentes en el modelo
-	 */
-	public int darTamano()
+	public void probar()
 	{
-		return datos.darTamano();
-	}
-
-	/**
-	 * Requerimiento de agregar dato
-	 * @param dato
-	 */
-	public void agregar(Integer dato)
-	{	
-		datos.agregar(dato);
-	}
-	
-	/**
-	 * Requerimiento buscar dato
-	 * @param dato Dato a buscar
-	 * @return dato encontrado
-	 */
-	public Integer buscar(Integer dato)
-	{
-		return (Integer) datos.buscar(dato);
-	}
-	
-	/**
-	 * Requerimiento eliminar dato
-	 * @param dato Dato a eliminar
-	 * @return dato eliminado
-	 */
-	public Integer eliminar(Integer dato)
-	{
-		return (Integer) datos.eliminar(dato);
-	}
-	
-	public IArregloDinamico darDatos()
-	{
-		return datos;
+		
+		ListaEncadenada lista = new ListaEncadenada("perro3");
+		lista.addFirst("perro1");
+		lista.addLast("perro4");
+		lista.addLast("perro5");
+		
+		try 
+		{
+			lista.insertElement("perro2", 2);
+			lista.giveLastElement();
+			lista.get(2);
+			lista.intercambiarInfo(1, 3);
+			lista.cambiarInfo(1, "perro1");
+			lista.cambiarInfo(3, "perro3");
+			lista.removePosition(2);
+		} 
+		catch (Exception e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		lista.getFirtsElement();
+		lista.isPresent("perra3");
+		lista.removeFirst();
+		lista.removeLast();
+		
+		
 	}
 
 

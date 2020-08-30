@@ -1,4 +1,4 @@
-module T0_202020 {
+module taller2Estructura {
 	exports test.data_structures;
 	exports controller;
 	exports view;
@@ -7,7 +7,7 @@ module T0_202020 {
 	exports main;
 	exports model.data_structures;
 
-	requires junit;
 	requires java.desktop;
+	requires junit;
 	requires opencsv;
 }

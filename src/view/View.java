@@ -25,16 +25,5 @@ public class View
 			System.out.println(mensaje);
 		}		
 		
-		public void printModelo(Modelo modelo)
-		{
-			// TODO implementar
-			int tamano=modelo.darTamano();
-			String mensaje="";
-			for (int i=0;i<tamano;i++)
-			{
-				mensaje= mensaje+ modelo.darDatos().darElemento(i)+", ";;
-			}
-			System.out.println(mensaje);
-			
-		}
+		
 }

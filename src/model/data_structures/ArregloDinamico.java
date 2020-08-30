@@ -12,7 +12,7 @@ import javax.swing.Box;
  *
  */
 
-public class ArregloDinamico  <T extends Comparable<T>> implements IArregloDinamico<T> {
+public   class ArregloDinamico  <T extends Comparable<T>> implements Lista<T> {
 	/**
 	 * Capacidad maxima del arreglo
 	 */
@@ -40,9 +40,72 @@ public class ArregloDinamico  <T extends Comparable<T>> implements IArregloDinam
 	
 	
     
-	public void agregar( T dato )
-    {
-           if ( tamanoAct == tamanoMax )
+
+	
+	public void addFirst(T dato)
+	{
+		if(elementos[0] == null)
+		{
+			elementos[0]= dato;
+		}
+		else
+		{
+			if ( tamanoMax == tamanoAct )
+			{
+			expandArray();
+			}
+			for(int i=tamanoAct; i>0;i--)
+			{
+				elementos[i]= elementos[i-1];
+			}
+			elementos[0]=dato;
+		}
+		 tamanoAct++;
+	}
+	
+	public void expandArray() 
+	{
+		T[] expanded = (T[]) new Object[5+tamanoAct]; ;
+		for (int i = 0; i < elementos.length; i++)
+		{
+		expanded[i] = (T) elementos[i];
+		}
+		tamanoMax=5+tamanoAct;
+		elementos = null;
+		elementos = expanded;
+		}
+	
+	public void insertElement(T dato, int pos) throws Exception
+	{
+		if (pos < 1 || pos > tamanoAct)
+		{
+			throw new Exception("no se puede eliminar el objeto de la posicion"+pos);
+		}
+		
+		if ( tamanoMax == tamanoAct )
+		{
+		expandArray();
+		}
+		
+        for ( int i = tamanoAct; i > pos-1; i--)
+        {
+        	
+         			
+         	elementos[i]=elementos[i-1];
+         			
+         }
+         		
+         elementos[pos]=dato;
+         		
+         tamanoAct++;
+         	 
+         
+		
+	}
+	
+	public void addLast(T dato)
+	{
+		   if ( tamanoAct == tamanoMax )
            {  // caso de arreglo lleno (aumentar tamaNo)
                 tamanoMax = 2 * tamanoMax;
                 Object [ ] copia = elementos;
@@ -55,141 +118,33 @@ public class ArregloDinamico  <T extends Comparable<T>> implements IArregloDinam
            }	
            elementos[tamanoAct] = dato;
            tamanoAct++;
-   }
-	
-	public void agregarPrimero(T dato)
-	{
-		if(elementos[0] == null)
-		{
-			elementos[0]= dato;
-		}
-		else
-		{
-			for(int i=tamanoAct; i>0;i--)
-			{
-				elementos[i]= elementos[i-1];
-			}
-			elementos[0]=dato;
-		}
-		 tamanoAct++;
-	}
-	
-	
-	public void insertarElemento(T dato, int pos)
-	{
-		
-		boolean parar=false;
-        for ( int i = 0; i < tamanoAct && parar==false; i++)
-        {
-        	T objeto= (T) elementos[i];
-         	 if (  dato.compareTo(objeto)==0)
-         	 {
-         		
-         		
-         		for (int j=tamanoAct;j>i ;j--)
-         		{
-         			
-         				elementos[j]=elementos[j-1];
-         			
-         		}
-         		
-         		elementos[i]=dato;
-         		parar=true;
-         		tamanoAct++;
-         	 }
-        } 
-		
-	}
-	
-	public void agregarUltimo(T dato)
-	{
-		elementos[tamanoAct] = dato; 
 	}
 
-	public int darCapacidad() 
-	{
-		return tamanoMax;
-	}
 
-	public int darTamano() 
+
+	public int size() 
 	{
 		return tamanoAct;
 	}
 
-	public  T darElemento(int j) {
-		// TODO implementar
-
-		return (T) elementos[j] ;
-	}
-
-	public <T extends Comparable<T>> T buscar(T dato) {
-		// TODO implementar
-		// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
-		T respuesta=null;
-		boolean parar=false;
-        for ( int i = 0; i < tamanoAct && parar==false; i++)
-        {
-        	T objeto= (T) elementos[i];
-         	 if (  dato.compareTo(objeto)==0)
-         	 {
-         		respuesta=objeto;
-         		parar=true;
-         	 }
-        } 
-		return respuesta;
-	}
-
-	public <T extends Comparable<T>> T eliminar(T dato) {
-		// TODO implementar
-		// Recomendacion: Usar el criterio de comparacion natural (metodo compareTo()) definido en Strings.
-		T respuesta=null;
-		boolean parar=false;
-        for ( int i = 0; i < tamanoAct && parar==false; i++)
-        {
-        	T objeto= (T) elementos[i];
-         	 if (  dato.compareTo(objeto)==0)
-         	 {
-         		respuesta=objeto;
-         		
-         		for (int j=i;j< tamanoAct;j++)
-         		{
-         			if (j!=tamanoAct-1)
-         				{
-         				elementos[j]=elementos[j+1];
-         				}
-         			else
-         			{
-         				elementos[j]=null;
-         			}
-         		}
-         		
-         		parar=true;
-         		tamanoAct=tamanoAct-1;
-         	 }
-        } 
-		return respuesta;
-		
-	}
-	
-	public T eliminarPrimero()
+	public  T get(int j) throws Exception 
 	{
-		T primero = (T) elementos[0];
-		for(int i = 0; i < tamanoAct ; i++)
-		{
-			if (i!=tamanoAct-1)
-				{
-				elementos[i]=elementos[i+1];
-				}
-			else
-			{
-				elementos[i]=null;
-			}
-		}
-		tamanoAct=tamanoAct-1;
-		return primero;
+		// TODO implementar
+
+		if (j < 1 || j > tamanoAct)
+		 {
+		 throw new Exception("no se puede obtener el objeto de la posicion"+j);
+		 }
+		 return (T) elementos[j-1];
 	}
 
-	public T eliminarUltimo()
+
+
+
+	
+
+
+	public T removeLast()
 	{
 		T ultimo = (T) elementos[tamanoAct-1];
 		elementos[tamanoAct-1] = null; 
@@ -197,10 +152,10 @@ public class ArregloDinamico  <T extends Comparable<T>> implements IArregloDinam
 		return ultimo;
 	}
 	
-	public T eliminarElementoPosicion(int pos)
+	public T removePosition(int pos)
 	{
-		T eliminado = (T) elementos[pos]; 
-		for(int i = pos  ; i <tamanoAct ; i++)
+		T eliminado = (T) elementos[pos-1]; 
+		for(int i = pos-1  ; i <tamanoAct ; i++)
 		{
 			if (i!=tamanoAct-1)
 				{
@@ -218,27 +173,19 @@ public class ArregloDinamico  <T extends Comparable<T>> implements IArregloDinam
 		return eliminado;
 	}
 	
-	public T darPrimerElemento()
+	public T getFirtsElement()
 	{
 		return (T) elementos[0];
 	}
 	
-	public T darUltimoElemento()
+	public T giveLastElement()
 	{
 		return (T) elementos[tamanoAct - 1];
 	}
 	
-	public boolean estaVacio()
-	{
-		boolean rta = true;
-		if(elementos[0] != null)
-		{
-			rta = false;
-		}
-		return rta;
-	}
+
 	
-	public int estaPresente(T elemento)
+	public int isPresent(T elemento)
 	{
 		int rta = -1;
 		for(int i = 0; i < tamanoAct && rta == -1; i++)
@@ -246,7 +193,7 @@ public class ArregloDinamico  <T extends Comparable<T>> implements IArregloDinam
 			T comparar = (T) elementos[i];
 			if(elemento.compareTo(comparar) == 0)
 			{
-				rta = i;
+				rta = i+1;
 			}
 		}
 		return rta; 
@@ -261,6 +208,72 @@ public class ArregloDinamico  <T extends Comparable<T>> implements IArregloDinam
 	
 	public void cambiarInfo(int i, T elemento)
 	{
-		elementos[i] = elemento; 			
+		elementos[i-1] = elemento; 			
 	}
-}
+
+
+
+	
+
+
+
+	@Override
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		boolean x=true;
+		if (tamanoAct==0) 
+		{
+			x=false;
+		}
+		return x;
+	}
+
+
+
+	@Override
+	public T removeFirst() {
+		// TODO Auto-generated method stub
+		T primero = (T) elementos[0];
+		for(int i = 0; i < tamanoAct ; i++)
+		{
+			if (i!=tamanoAct-1)
+				{
+				elementos[i]=elementos[i+1];
+				}
+			else
+			{
+				elementos[i]=null;
+			}
+		}
+		tamanoAct=tamanoAct-1;
+		return primero;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

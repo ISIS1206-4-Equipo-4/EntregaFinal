@@ -21,7 +21,7 @@ public class TestArregloDinamico {
 	public void setUp2() 
 	{
 		for(int i =0; i< TAMANO*2; i++){
-			arreglo.agregar(""+i);
+			arreglo.addLast(""+i);
 		}
 	}
 
@@ -35,111 +35,103 @@ public class TestArregloDinamico {
 	}
 
 	@Test
-	public void testDarElemento() 
+	public void testDarElemento() throws Exception 
 	{
 		setUp2();
 		// TODO
-		assertEquals("No se da el elemento esperado", 100, arreglo.darElemento(100));
+		assertEquals("No se da el elemento esperado", 100, arreglo.get(100));
 		
 	}
 	
-	public void testAgregar()
+	public void testAgregar() throws Exception
 	{
 		setUp1();
-		arreglo.agregar(1);
-		assertEquals("El elemento no se agrego correctamente", 1, arreglo.darElemento(0));
+		arreglo.addFirst(1);;
+		assertEquals("El elemento no se agrego correctamente", 1, arreglo.get(0));
 	}
 	
 	public void testDarCapacidad()
 	{
 		setUp1();
-		assertEquals("La capacidad no coincide", TAMANO, arreglo.darCapacidad());
+		assertEquals("La capacidad no coincide", TAMANO, arreglo.size());
 		
 	}
 	
 	public void testDarTamano()
 	{
 		setUp2();
-		assertEquals("El tamaño no es el correcto", 200, arreglo.darTamano());
+		assertEquals("El tamaño no es el correcto", 200, arreglo.size());
 		
 	}
-	
-	public void testBuscar()
-	{
-		setUp2();
-		assertEquals(200, arreglo.buscar(200));
-		
-		assertNull("No debio encontrar un elemento", arreglo.buscar(1000000));
-		
-	}
+
 	
 	public void testEliminar()
 	{
 		setUp2();
-		assertEquals(100, arreglo.eliminar(100));
+		assertEquals(100, arreglo.removePosition(100));
 	}
 	
 	public void testEliminarPrimero()
 	{
 		setUp2();
-		assertEquals(0, arreglo.eliminarPrimero());
+		assertEquals(0, arreglo.removeFirst());
 	}
 	
 	public void testEliminarUltimo()
 	{
 		setUp2();
-		assertEquals(199, arreglo.eliminarUltimo());
+		assertEquals(199, arreglo.removeLast());
 	}
 	
 	public void testEliminarPosicion()
 	{
 		setUp2();
-		assertEquals(25, arreglo.eliminarElementoPosicion(25));
+		assertEquals(25, arreglo.removePosition(25));
 	}
 	
 	public void testDarPrimerEle()
 	{
 		setUp2();
-		assertEquals(0, arreglo.darPrimerElemento());
+		assertEquals(0, arreglo.getFirtsElement());
 		
-		assertNotNull(arreglo.darPrimerElemento());
+		assertNotNull(arreglo.getFirtsElement());
 	}
 	
 	public void testDarUltimoEle()
 	{
 		setUp2();
 		
-		assertEquals(199, arreglo.darUltimoElemento());
+		assertEquals(199, arreglo.giveLastElement());
 		
-		assertNotNull(arreglo.darUltimoElemento());
+		assertNotNull(arreglo.giveLastElement());
 	}
 	
 	public void testVacia()
 	{
 		setUp1();
-		assertTrue(arreglo.estaVacio());
+		assertTrue(arreglo.isEmpty());
 	}
 	
 	public void testEstaPresente()
 	{
 		setUp2();
-		assertEquals(50, arreglo.estaPresente(50));
+		assertEquals(50, arreglo.isPresent(50));
 	}
 	
-	public void testCambiarInfo()
+	public void testCambiarInfo() throws Exception
 	{
 		setUp2();
 		arreglo.cambiarInfo(50, "Si lees esto tienes que ponernos 5");
 		
-		assertEquals("Si lees esto tienes que ponernos 5", arreglo.darElemento(50));
+		assertEquals("Si lees esto tienes que ponernos 5", arreglo.get(50));
 	}
 	
-	public void testIntercambiarInfo()
+	public void testIntercambiarInfo() throws Exception
 	{
 		setUp2();
 		arreglo.intercambiarInfo(10, 20);
 		
-		assertEquals(10, arreglo.darElemento(20));
+		assertEquals(10, arreglo.get(10));
 	}
 	
 	

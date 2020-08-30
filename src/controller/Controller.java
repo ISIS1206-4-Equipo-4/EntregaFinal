@@ -38,8 +38,18 @@ public class Controller {
 			
 				case 1:
 					modelo = new Modelo(2000); 
+					modelo.probar();
 					modelo.cargarPeliculas();
+				try 
+				{
+					
 					view.printMessage(modelo.escribirPrimerYUltimaPelicula());
+				} 
+				catch (Exception e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				   break;
 
 				case 2:
@@ -50,7 +60,15 @@ public class Controller {
 					}
 						view.printMessage("Del 1 al 10 desde que calificacion es una buena pelicula (',' son decimales):");
 						dato=lector.nextDouble();
-						view.printMessage(modelo.buenasPeliculasDirector(respuesta, dato));
+				try 
+				{
+					view.printMessage(modelo.buenasPeliculasDirector(respuesta, dato));
+				} 
+				catch (Exception e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 						break;	
 					
 					
