@@ -67,6 +67,10 @@ public class ListaEncadenada <T extends Comparable<T>> implements Lista<T>
 		{
 			this.addFirst(dato);
 		}
+		else if (pos==listSize)
+		{
+			this.addLast(dato);
+		}
 		else
 		{
 			while (actual.getNext()!= null&&!parar)
@@ -121,7 +125,7 @@ public class ListaEncadenada <T extends Comparable<T>> implements Lista<T>
 			{
 				actual=actual.getNext();
 			}
-			respuesta=actual.getItem();
+			respuesta=actual.getNext().getItem();
 			actual.setNextNode(null);
 			listSize--;
 		}
@@ -147,6 +151,7 @@ public class ListaEncadenada <T extends Comparable<T>> implements Lista<T>
 			respuesta=listFirst.getItem();
 			this.removeFirst();
 		}
+		
 		else
 		{
 			while (actual.getNext()!= null&&!parar)
@@ -219,6 +224,10 @@ public class ListaEncadenada <T extends Comparable<T>> implements Lista<T>
 			respuesta=listFirst.getItem();
 			
 		}
+		else if(pos==listSize)
+		{
+			respuesta=this.giveLastElement();
+		}
 		else
 		{
 			
@@ -262,22 +271,29 @@ public class ListaEncadenada <T extends Comparable<T>> implements Lista<T>
 	}
 
 	@Override
-	public int isPresent(T elemento) {
+	public int isPresent(T elemento) throws Exception {
 		// TODO Auto-generated method stub
 		int rta = -1;
 		Node<T> actual=listFirst;
 		int contador=1;
-		
-		while(actual.getNext()!=null && rta == -1)
+		if(this.giveLastElement().compareTo(elemento)==0)
 		{
-			
-			if(elemento.compareTo(actual.getItem()) == 0)
-			{
-				rta = contador;
-			}
-			contador++;
-			actual=actual.getNext();
+			rta=listSize;
 		}
+		else 
+		{
+			while(actual.getNext()!=null && rta == -1)
+			{
+				
+				if(elemento.compareTo(actual.getItem()) == 0)
+				{
+					rta = contador;
+				}
+				contador++;
+				actual=actual.getNext();
+			}
+		}
+		
 		return rta; 
 	}
 
@@ -316,6 +332,7 @@ public class ListaEncadenada <T extends Comparable<T>> implements Lista<T>
 			segundoSiguiente=listFirst.getNext();
 			parar2=true;
 		}
+		
 		
 		while (actual.getNext()!= null&&(!parar1||!parar2))
 			{
@@ -386,6 +403,14 @@ public class ListaEncadenada <T extends Comparable<T>> implements Lista<T>
 		{
 			listFirst.setItem(elemento);;
 			
+		}
+		else if(i==listSize)
+		{
+			while(actual.getNext() != null) 
+			{
+			actual = actual.getNext();
+			}
+			actual.setItem(elemento);
 		}
 		else
 		{

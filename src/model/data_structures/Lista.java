@@ -13,7 +13,7 @@ T giveLastElement() throws Exception;
 T get(int pos) throws Exception;
 int size();
 boolean isEmpty();
-int isPresent(T elemento);
+int isPresent(T elemento) throws Exception;
 void intercambiarInfo(int i, int j) throws Exception;
 void cambiarInfo(int i, T elemento) throws Exception;
 

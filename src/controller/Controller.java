@@ -3,6 +3,7 @@ package controller;
 import java.util.Scanner;
 
 import model.logic.Modelo;
+import model.logic.Stopwatch;
 import view.View;
 
 public class Controller {
@@ -37,13 +38,37 @@ public class Controller {
 			switch(option){
 			
 				case 1:
+					modelo.cargarPeliculasEncadenadas();
+					try 
+					{
+						Stopwatch timer = new Stopwatch();
+						view.printMessage(modelo.escribirPrimerYUltimaPeliculaEncadenada());
+						double time = timer.elapsedTime();
+						view.printMessage("el tiempo fue "+time);
+						
+						
+					} 
+					catch (Exception e)
+					{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					   break;
+					
+				
+				case 2:
 					modelo = new Modelo(2000); 
-					modelo.probar();
+					
 					modelo.cargarPeliculas();
 				try 
 				{
-					
+					Stopwatch timer = new Stopwatch();
 					view.printMessage(modelo.escribirPrimerYUltimaPelicula());
+					double time = timer.elapsedTime();
+					view.printMessage("el tiempo fue "+time);
+
+					
+					
 				} 
 				catch (Exception e)
 				{
@@ -52,17 +77,11 @@ public class Controller {
 				}
 				   break;
 
-				case 2:
-					view.printMessage("Nombre del director que desea buscar buenas peliculas:");
-					while(respuesta.equals(""))
-					{
-					respuesta=lector.nextLine();
-					}
-						view.printMessage("Del 1 al 10 desde que calificacion es una buena pelicula (',' son decimales):");
-						dato=lector.nextDouble();
+				case 3:
+					
 				try 
 				{
-					view.printMessage(modelo.buenasPeliculasDirector(respuesta, dato));
+					view.printMessage(modelo.malasPeliculas());
 				} 
 				catch (Exception e)
 				{
@@ -73,7 +92,7 @@ public class Controller {
 					
 					
 
-				case 3:
+				case 4:
 					view.printMessage("--------- \n Hasta pronto !! \n---------"); 
 					lector.close();
 					fin = true;

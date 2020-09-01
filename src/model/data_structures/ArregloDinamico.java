@@ -39,7 +39,10 @@ public   class ArregloDinamico  <T extends Comparable<T>> implements Lista<T> {
     }
 	
 	
-    
+    public Object[] darElementos()
+    {
+    	return  elementos;
+    }
 
 	
 	public void addFirst(T dato)
