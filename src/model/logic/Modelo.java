@@ -284,12 +284,19 @@ public class Modelo {
 	{
 		String respuesta="las peores peliculas";
 		
+		Comparable[] x= new Comparable[2000];
 		
-		ShellSort.sort((Comparable[]) datos.darElementos());
+		for (int i=0;i<2000;i++)
+		{
+			x[i]=datos.get(i+1);	
+		}
+		
+		
+		ShellSort.sort(x);
 		
 		for(int i=0;i<20;i++)
 		{
-			Movies actual=(Movies) datos.get(i);
+			Movies actual=(Movies) x[i];
 			
 				respuesta=respuesta+"\nTitulo: "+actual.darTitulo()+" \nID: "+actual.darId()+" \nGenero: "+actual.darGenero()+" \nDia de Lanzamiento: " +actual.darDate()+" \nPromedio votos: "+actual.darPromedioVotos()+" \nActor1: "+actual.darActor1()+" \nActor2: "+actual.darActor2()+" \nActor3: "+actual.darActor3()+" \nActor4: "+actual.darActor4()+" \nActor5: "+actual.darActor5()+"\n\n";
 

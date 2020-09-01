@@ -15,22 +15,19 @@ public class ShellSort
 			 int N = array.length;
 			 int h = 1;
 			 while (h < N/3) 
-			 {
 				 h = 3*h + 1;
-				 
 				 while (h >= 1)
 				 {
 					 for (int i = h; i < N; i++) 
 					 {
 						 for (int j = i; j >= h && array[j].compareTo(array[j-h])<0; j -= h)
-						 {
 						 exch(array, j, j-h);
-						 }
+						 
 					 }
 						 h = h/3; 
 				 }
 				 
-			 }
+			 
 				 	 
 	 }
 	 

@@ -1,4 +1,4 @@
-module taller2Estructura {
+module taller2Estructura_def {
 	exports test.data_structures;
 	exports controller;
 	exports view;
