@@ -154,7 +154,12 @@ public class TestListaEncadenada
 	public void isPresent()
 	{
 		setUp2();
-		assertEquals(88, lista.isPresent(88));
+		try {
+			assertEquals(88, lista.isPresent(88));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void testIntercambiar()

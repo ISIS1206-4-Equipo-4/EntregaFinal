@@ -152,8 +152,21 @@ public class Movies implements Comparable
 	@Override
 	public int compareTo(Object o) 
 	{
+		Movies pelicula=(Movies)o;
 		// TODO Auto-generated method stub
-		return 0;
+		int resultado=0;
+		if (this.darPromedioVotos()<pelicula.darPromedioVotos())
+		{
+		resultado = -1;
+		}
+		else if (this.darPromedioVotos()>pelicula.darPromedioVotos())
+		{
+		resultado = 1;
+		}
+		return resultado;
 	}
+
+	
+	
 
 }
