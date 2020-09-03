@@ -90,9 +90,16 @@ public class Controller {
 				}
 						break;	
 					
-					
-
 				case 4:
+					String director = lector.nextLine();
+				try {
+					view.printMessage(modelo.conocerDirector(director));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				case 7:
 					view.printMessage("--------- \n Hasta pronto !! \n---------"); 
 					lector.close();
 					fin = true;

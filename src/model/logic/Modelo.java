@@ -26,6 +26,8 @@ public class Modelo {
 	private ArregloDinamico datos;
 	private ListaEncadenada lista;
 	
+	public final static int TAMANO = 2000;
+	
 	
 	/**
 	 * Constructor del modelo del mundo con capacidad predefinida
@@ -305,6 +307,32 @@ public class Modelo {
 		}
 		
 		return respuesta;
+	}
+	
+	public String conocerDirector(String pDirector) throws Exception
+	{
+		String rta = "Informacion del director " + pDirector;
+		int cont = 0;
+		int suma = 0;
+		int promedio = 0; 
+		for(int i= 0; i < TAMANO; i++)
+		{
+			Movies pelicula = (Movies) datos.get(i+1);
+			if(pelicula.darDirector().compareTo(pDirector) == 0)
+			{
+				rta = rta + "\nTitulo: " + pelicula.darTitulo() + pelicula.darId()+" \nGenero: "+pelicula.darGenero()+" \nDia de Lanzamiento: " +pelicula.darDate()+" \nPromedio votos: "+pelicula.darPromedioVotos()+" \nActor1: "+pelicula.darActor1()+" \nActor2: "+pelicula.darActor2()+" \nActor3: "+pelicula.darActor3()+" \nActor4: "+pelicula.darActor4()+" \nActor5: "+pelicula.darActor5();
+				cont++;
+				suma += pelicula.darPromedioVotos();
+			}
+		}
+		if (cont != 0) 
+		{
+			promedio = suma/cont;	
+		}
+		
+		rta += "\nNumero de peliculas: " + cont + "\nPromedio: " + promedio;
+		
+		return rta; 
 	}
 	
 	/**
