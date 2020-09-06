@@ -91,6 +91,7 @@ public class Controller {
 						break;	
 					
 				case 4:
+					view.printMessage("Ingrese el nombre del director");
 					String director = lector.nextLine();
 				try {
 					view.printMessage(modelo.conocerDirector(director));

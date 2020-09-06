@@ -14,11 +14,13 @@ public class View
 	    
 		public void printMenu()
 		{
-			System.out.println("1.Opcion 1");
-			System.out.println("2.Opcion 2");
-			System.out.println("3.Opcion 3");
-			System.out.println("4. Opcion 4");
-			System.out.println("7. Exit");
+			System.out.println("1.Encontrar buenas peliculas");
+			System.out.println("2.Ranking peliculas");
+			System.out.println("3.Conocer a un director");
+			System.out.println("4.Conocer a un actor");
+			System.out.println("5.Entender un género cinematografico");
+			System.out.println("6.Ranking género");
+			System.out.println("7.Exit");
 			System.out.println("Dar el numero de opcion a resolver, luego oprimir tecla Return: (e.g., 1):");
 		}
 

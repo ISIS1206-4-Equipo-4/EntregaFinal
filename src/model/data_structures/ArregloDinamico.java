@@ -133,9 +133,10 @@ public   class ArregloDinamico  <T extends Comparable<T>> implements Lista<T> {
 
 		if (j < 1 || j > tamanoAct)
 		 {
-		 throw new Exception("no se puede obtener el objeto de la posicion"+j);
+		 throw new Exception("no se puede obtener el objeto de la posicion "+j);
 		 }
 		 return (T) elementos[j-1];
+		//return (T) elementos[j-1];
 	}
 
 
