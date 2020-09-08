@@ -49,7 +49,7 @@ public class Controller {
 					view.printMessage("Del 1 al 10 desde que calificacion es una buena pelicula (',' son decimales):");
 					dato = lector.nextDouble();
 					Stopwatch timer = new Stopwatch();
-					view.printMessage(modelo.buenasPeliculasDirector(respuesta, dato));
+					view.printMessage(modelo.req1(respuesta, dato));
 					double time = timer.elapsedTime();
 					view.printMessage("\nTiempo: " + time);
 				}
@@ -64,14 +64,14 @@ public class Controller {
 					int numeroPelis = 0; 
 					String criterio = ""; 
 					String orden = "";
-					view.printMessage("Escriba el numero de películas que quiere comparar");
+					view.printMessage("Escriba el numero de pelÃ­culas que quiere comparar");
 					numeroPelis = lector.nextInt();
 					view.printMessage("Escriba el criterio por el que quiere comparar las peliculas (COUNT, AVERAGE)");
 					criterio = lector.nextLine();
 					view.printMessage("Escriba las peliculas que quiere ver (BEST, WORST)");
 					orden = lector.nextLine();
 					Stopwatch timer = new Stopwatch(); 
-					view.printMessage(modelo.rankingPeliculas(criterio, numeroPelis, orden));
+					view.printMessage(modelo.req2(criterio, numeroPelis, orden));
 					double time = timer.elapsedTime();
 					view.printMessage("\nTiempo: " + time);
 				   break;
@@ -81,7 +81,7 @@ public class Controller {
 				{
 					view.printMessage("Ingrese el nombre del director");
 					String director = lector.nextLine();
-					view.printMessage(modelo.conocerDirector(director));
+					view.printMessage(modelo.req3(director));
 				} 
 				catch (Exception e) 
 				{
@@ -96,7 +96,7 @@ public class Controller {
 					{
 						view.printMessage("Ingrese el nombre del actor");
 						String actor = lector.nextLine();
-						view.printMessage(modelo.conocerActor(actor));
+						view.printMessage(modelo.req4(actor));
 					} 
 					catch (Exception e) 
 					{
@@ -109,7 +109,7 @@ public class Controller {
 					{
 						view.printMessage("Ingrese el nombre del genero");
 						String genero = lector.nextLine();
-						view.printMessage(modelo.conocerGenero(genero));
+						view.printMessage(modelo.req5(genero));
 					} 
 					catch (Exception e) 
 					{
@@ -122,7 +122,7 @@ public class Controller {
 					String criterio2 = ""; 
 					String orden2 = "";
 					String genero = "";
-					view.printMessage("Escriba el numero de películas que quiere comparar");
+					view.printMessage("Escriba el numero de pelÃ­culas que quiere comparar");
 					numeroPeliculas = lector.nextInt();
 					view.printMessage("Escriba el genero que quiere comparar");
 					genero = lector.nextLine();
@@ -130,7 +130,7 @@ public class Controller {
 					criterio2 = lector.nextLine();
 					view.printMessage("Escriba las peliculas que quiere ver (BEST, WORST)");
 					orden2 = lector.nextLine();
-					view.printMessage(modelo.rankingGenero(numeroPeliculas, genero, criterio2, orden2));
+					view.printMessage(modelo.req6(numeroPeliculas, genero, criterio2, orden2));
 
 				case 7:
 					view.printMessage("--------- \n Hasta pronto !! \n---------"); 
