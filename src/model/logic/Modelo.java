@@ -255,7 +255,7 @@ public class Modelo {
 		}
 	}
 	
-	public String buenasPeliculasDirector(String nombre, double calificacion) throws Exception
+	public String req1(String nombre, double calificacion) throws Exception
 	{
 		String respuesta="Peliculas buenas del director "+nombre;
 		int tamano=datos.size();
@@ -274,7 +274,7 @@ public class Modelo {
 		return respuesta;
 	}
 	
-	public String rankingPeliculas(String pTipoRanking, int pNumeroPeliculas, String pOrden)
+	public String req2(String pTipoRanking, int pNumeroPeliculas, String pOrden)
 	{
 		String respuesta = "";
 		return respuesta;
@@ -336,7 +336,7 @@ public class Modelo {
 		return respuesta;
 	}
 	
-	public String conocerDirector(String pDirector) throws Exception
+	public String req3(String pDirector) throws Exception
 	{
 		String rta = "Informacion del director " + pDirector;
 		int cont = 0;
@@ -363,7 +363,7 @@ public class Modelo {
 	}
 	
 	
-	public String conocerActor(String pActor) throws Exception
+	public String req4(String pActor) throws Exception
 	{
 		String rta = "Información de " + pActor;
 		int pelis = 0;
@@ -415,7 +415,7 @@ public class Modelo {
 		return rta; 
 	}
 	
-	public String rankingGenero(int pNumeroPeliculas, String pGenero, String pTipoRanking, String pOrden)
+	public String req6(int pNumeroPeliculas, String pGenero, String pTipoRanking, String pOrden)
 	{
 		String rta = "";
 		return rta;
