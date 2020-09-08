@@ -342,7 +342,7 @@ public class Modelo {
 		int cont = 0;
 		int suma = 0;
 		int promedio = 0; 
-		for(int i= 0; i < TAMANO; i++)
+		for(int i= 0; i <= datos.size(); i++)
 		{
 			Movies pelicula = (Movies) datos.get(i+1);
 			if(pelicula.darDirector().compareTo(pDirector) == 0)
@@ -369,7 +369,7 @@ public class Modelo {
 		int pelis = 0;
 		int suma = 0;
 		int prom = 0; 
-		for(int i= 0; i < datos.size() ; i++)
+		for(int i= 0; i <= datos.size() ; i++)
 		{
 			Movies peli = (Movies) datos.get(i+1);
 			if(peli.darActor1().compareTo(pActor) == 0 || peli.darActor2().compareTo(pActor) == 0 || peli.darActor3().compareTo(pActor) == 0 || peli.darActor4().compareTo(pActor) == 0 || peli.darActor5().compareTo(pActor) == 0)
