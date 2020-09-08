@@ -30,6 +30,8 @@ public class Controller {
 		boolean fin = false;
 		double dato = 0;
 		String respuesta = "";
+		modelo = new Modelo(32000);
+		modelo.cargarPeliculas();
 
 		while( !fin ){
 			view.printMenu();
@@ -37,29 +39,33 @@ public class Controller {
 			int option = lector.nextInt();
 			switch(option){
 			
-				case 1:
-					modelo.cargarPeliculasEncadenadas();
-					try 
+				case 1:	
+					double dato2 = 0;
+					String respuesta2 = "";						
+					view.printMessage("Ingrese el nombre del director");
+					while(respuesta2.equals(""))
 					{
-						Stopwatch timer = new Stopwatch();
-						view.printMessage(modelo.escribirPrimerYUltimaPeliculaEncadenada());
-						double time = timer.elapsedTime();
-						view.printMessage("el tiempo fue "+time);
-						
-						
-					} 
-					catch (Exception e)
-					{
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						respuesta2 = lector.nextLine();
 					}
-					   break;
+					try
+				{
+					view.printMessage("Del 1 al 10 desde que calificacion es una buena pelicula (',' son decimales):");
+					dato2 = lector.nextDouble();
+					view.printMessage(modelo.requerimiento1(respuesta2, dato2));
+					
+				}
+				catch (Exception e1) 
+				{
+				
+					e1.printStackTrace();
+				}		
+				break;
 					
 				
 				case 2:
-					modelo = new Modelo(2000); 
+					 
 					
-					modelo.cargarPeliculas();
+					
 					view.printMessage("escriba el numero de peliculas que desea conformar el ranking");
 					int numero=0;
 					numero=lector.nextInt();
@@ -67,6 +73,7 @@ public class Controller {
 					view.printMessage("desea organizarlas por 'AVERAGE'o 'COUNT'");
 					String orden="";
 					orden=lector.next();
+					
 					
 					view.printMessage("desea que sea 'ascendente' o 'descendente' ");
 					String forma="";
@@ -87,25 +94,49 @@ public class Controller {
 				}
 				   break;
 
-				case 3:
+				case 3:					
+					try 
+					{
+						view.printMessage("Ingrese el nombre del director");
+						String director = "";
+						while(director.equals(""))
+						{
+							director = lector.nextLine();
+						}
+						view.printMessage(modelo.requerimiento3(director));
+					} 
+					catch (Exception e) 
+					{
+						
+						e.printStackTrace();
+					}				
 					
-				try 
-				{
-					view.printMessage(modelo.malasPeliculas());
-				} 
-				catch (Exception e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-						break;	
-					
+							break;	
+							
+							
+						
+					case 4:
+						try 
+						{
+							view.printMessage("Ingrese el nombre del actor");
+							String actor = "";
+							while(actor.equals(""))
+							{
+								actor = lector.nextLine();
+							}
+							 
+							view.printMessage(modelo.requerimiento4(actor));
+						} 
+						catch (Exception e) 
+						{
+							
+							e.printStackTrace();
+						}	
+						break;
 					
 						
 				case 5:
-					modelo = new Modelo(32000); 
 					
-					modelo.cargarPeliculas();
 					view.printMessage("escriba el genero que desea buscar peliculas");
 					String genero="";
 					
@@ -128,9 +159,7 @@ public class Controller {
 				   break;
 				   
 				case 6:
-					modelo = new Modelo(2000); 
 					
-					modelo.cargarPeliculas();
 					
 					view.printMessage("cual es el genero del cual se desea hacer el ranking");
 					String genero1="";
