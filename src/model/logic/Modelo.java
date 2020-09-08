@@ -142,19 +142,7 @@ public class Modelo {
 		
 	}
 	
-	public String escribirPrimerYUltimaPelicula() throws Exception
-	{
-		String respuesta="";
-		
-			Movies primera=(Movies) datos.get(1);
-			int posicionUltima=datos.size();
-			Movies ultima=(Movies) datos.get(posicionUltima);
-			int totalPeliculas=datos.size();
-			respuesta="Primera Pelicula \nTitulo: "+primera.darTitulo()+" \ndirector: "+primera.darDirector()+" \nID: "+primera.darId()+" \nGenero: "+primera.darGenero()+" \nDia de Lanzamiento: " +primera.darDate()+" \nPromedio votos: "+primera.darPromedioVotos()+" \nLenguaje: "+primera.darSpokenLenguage();
-			respuesta=respuesta+"\n\n"+"Ultima Pelicula \nTitulo: "+ultima.darTitulo()+" \ndirector: "+ultima.darDirector()+" \nID: "+ultima.darId()+" \nGenero: "+ultima.darGenero()+" \nDia de Lanzamiento: " +ultima.darDate()+" \nPromedio votos: "+ultima.darPromedioVotos()+" \nLenguaje: "+ultima.darSpokenLenguage();
-			respuesta=respuesta+"\n\nTotal Peliculas: "+totalPeliculas+"\n\n";
-		return respuesta;
-	}
+	
 	
 	
 	public void cargarPeliculasEncadenadas()
@@ -267,6 +255,45 @@ public class Modelo {
 		}
 	}
 	
+	public String buenasPeliculasDirector(String nombre, double calificacion) throws Exception
+	{
+		String respuesta="Peliculas buenas del director "+nombre;
+		int tamano=datos.size();
+		
+		for(int i=0;i<tamano;i++)
+		{
+			Movies actual=(Movies) datos.get(i);
+			if (actual.darDirector().equals(nombre)&&actual.darPromedioVotos()>=calificacion)
+			{
+				respuesta=respuesta+"\nTitulo: "+actual.darTitulo()+" \nID: "+actual.darId()+" \nGenero: "+actual.darGenero()+" \nDia de Lanzamiento: " +actual.darDate()+" \nPromedio votos: "+actual.darPromedioVotos()+" \nActor1: "+actual.darActor1()+" \nActor2: "+actual.darActor2()+" \nActor3: "+actual.darActor3()+" \nActor4: "+actual.darActor4()+" \nActor5: "+actual.darActor5()+"\n\n";
+
+				
+			}
+		}
+		
+		return respuesta;
+	}
+	
+	public String rankingPeliculas(String pTipoRanking, int pNumeroPeliculas, String pOrden)
+	{
+		String respuesta = "";
+		return respuesta;
+	}
+	
+	public String escribirPrimerYUltimaPelicula() throws Exception
+	{
+		String respuesta="";
+		
+			Movies primera=(Movies) datos.get(1);
+			int posicionUltima=datos.size();
+			Movies ultima=(Movies) datos.get(posicionUltima);
+			int totalPeliculas=datos.size();
+			respuesta="Primera Pelicula \nTitulo: "+primera.darTitulo()+" \ndirector: "+primera.darDirector()+" \nID: "+primera.darId()+" \nGenero: "+primera.darGenero()+" \nDia de Lanzamiento: " +primera.darDate()+" \nPromedio votos: "+primera.darPromedioVotos()+" \nLenguaje: "+primera.darSpokenLenguage();
+			respuesta=respuesta+"\n\n"+"Ultima Pelicula \nTitulo: "+ultima.darTitulo()+" \ndirector: "+ultima.darDirector()+" \nID: "+ultima.darId()+" \nGenero: "+ultima.darGenero()+" \nDia de Lanzamiento: " +ultima.darDate()+" \nPromedio votos: "+ultima.darPromedioVotos()+" \nLenguaje: "+ultima.darSpokenLenguage();
+			respuesta=respuesta+"\n\nTotal Peliculas: "+totalPeliculas+"\n\n";
+		return respuesta;
+	}
+	
 	public String escribirPrimerYUltimaPeliculaEncadenada() throws Exception
 	{
 		String respuesta="";
@@ -334,6 +361,66 @@ public class Modelo {
 		
 		return rta; 
 	}
+	
+	
+	public String conocerActor(String pActor) throws Exception
+	{
+		String rta = "Informacion del actor " + pActor;
+		int cont = 0;
+		int suma = 0;
+		int promedio = 0; 
+		for(int i= 0; i < TAMANO; i++)
+		{
+			Movies pelicula = (Movies) datos.get(i+1);
+			if(pelicula.darActor1().compareTo(pActor) == 0)
+			{
+				rta = rta + "\nTitulo: " + pelicula.darTitulo() + pelicula.darId()+" \nGenero: "+pelicula.darGenero()+" \nDia de Lanzamiento: " +pelicula.darDate()+" \nPromedio votos: "+pelicula.darPromedioVotos()+" \nActor1: "+pelicula.darActor1()+" \nActor2: "+pelicula.darActor2()+" \nActor3: "+pelicula.darActor3()+" \nActor4: "+pelicula.darActor4()+" \nActor5: "+pelicula.darActor5();
+				cont++;
+				suma += pelicula.darPromedioVotos();
+			}
+		}
+		if (cont != 0) 
+		{
+			promedio = suma/cont;	
+		}
+		
+		rta += "\nNumero de peliculas: " + cont + "\nPromedio: " + promedio;
+		
+		return rta; 
+	}
+	
+	public String conocerGenero(String pGenero) throws Exception
+	{
+		String rta = "Informacion del genero " + pGenero;
+		int cont = 0;
+		int suma = 0;
+		int promedio = 0; 
+		for(int i= 0; i < TAMANO; i++)
+		{
+			Movies pelicula = (Movies) datos.get(i+1);
+			if(pelicula.darGenero().compareTo(pGenero) == 0)
+			{
+				rta = rta + "\nTitulo: " + pelicula.darTitulo() + pelicula.darId()+" \nDia de Lanzamiento: " +pelicula.darDate()+" \nPromedio votos: "+pelicula.darPromedioVotos()+" \nActor1: "+pelicula.darActor1()+" \nActor2: "+pelicula.darActor2()+" \nActor3: "+pelicula.darActor3()+" \nActor4: "+pelicula.darActor4()+" \nActor5: "+pelicula.darActor5();
+				cont++;
+				suma += pelicula.darPromedioVotos();
+			}
+		}
+		if (cont != 0) 
+		{
+			promedio = suma/cont;	
+		}
+		
+		rta += "\nNumero de peliculas: " + cont + "\nPromedio: " + promedio;
+		
+		return rta; 
+	}
+	
+	public String rankingGenero(int pNumeroPeliculas, String pGenero, String pTipoRanking, String pOrden)
+	{
+		String rta = "";
+		return rta;
+	}
+	
 	
 	/**
 	 * Constructor del modelo del mundo con capacidad dada
