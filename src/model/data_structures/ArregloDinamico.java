@@ -79,7 +79,7 @@ public   class ArregloDinamico  <T extends Comparable<T>> implements Lista<T> {
 	{
 		if (pos < 1 || pos > tamanoAct)
 		{
-			throw new Exception("no se puede eliminar el objeto de la posicion"+pos);
+			throw new Exception("no se puede instertar el objeto de la posicion"+pos);
 		}
 		
 		if ( tamanoMax == tamanoAct )

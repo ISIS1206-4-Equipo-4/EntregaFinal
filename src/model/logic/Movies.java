@@ -119,6 +119,11 @@ public class Movies implements Comparable
 		return votosPromedio;
 	}
 	
+	public double darNumeroVotos()
+	{
+		return numeroVotos;
+	}
+	
 	public String darActor1()
 	{
 		return actor1;
@@ -149,22 +154,48 @@ public class Movies implements Comparable
 		return director;
 	}
 	
-	@Override
-	public int compareTo(Object o) 
+	
+
+	public int compareToRequerimiento(Object o, String tipoOrden) 
 	{
 		Movies pelicula=(Movies)o;
 		// TODO Auto-generated method stub
 		int resultado=0;
-		if (this.darPromedioVotos()<pelicula.darPromedioVotos())
+		
+		if(tipoOrden.equals("AVERAGE"))
 		{
-		resultado = -1;
+			if (this.darPromedioVotos()<pelicula.darPromedioVotos())
+			{
+			resultado = -1;
+			}
+			else if (this.darPromedioVotos()>pelicula.darPromedioVotos())
+			{
+			resultado = 1;
+			}
 		}
-		else if (this.darPromedioVotos()>pelicula.darPromedioVotos())
+		else if (tipoOrden.equals("COUNT"))
 		{
-		resultado = 1;
+			if (this.darNumeroVotos()<pelicula.darNumeroVotos())
+			{
+			resultado = -1;
+			}
+			else if (this.darNumeroVotos()>pelicula.darNumeroVotos())
+			{
+			resultado = 1;
+			}
 		}
+		
 		return resultado;
 	}
+
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	
 
 	
 	

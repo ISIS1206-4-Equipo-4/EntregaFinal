@@ -60,12 +60,22 @@ public class Controller {
 					modelo = new Modelo(2000); 
 					
 					modelo.cargarPeliculas();
+					view.printMessage("escriba el numero de peliculas que desea conformar el ranking");
+					int numero=0;
+					numero=lector.nextInt();
+					
+					view.printMessage("desea organizarlas por 'AVERAGE'o 'COUNT'");
+					String orden="";
+					orden=lector.next();
+					
+					view.printMessage("desea que sea 'ascendente' o 'descendente' ");
+					String forma="";
+					forma=lector.next();
 				try 
 				{
-					Stopwatch timer = new Stopwatch();
-					view.printMessage(modelo.escribirPrimerYUltimaPelicula());
-					double time = timer.elapsedTime();
-					view.printMessage("el tiempo fue "+time);
+					
+					view.printMessage(modelo.requerimiento2(numero, orden, forma));
+					
 
 					
 					
@@ -91,8 +101,71 @@ public class Controller {
 						break;	
 					
 					
+						
+				case 5:
+					modelo = new Modelo(32000); 
+					
+					modelo.cargarPeliculas();
+					view.printMessage("escriba el genero que desea buscar peliculas");
+					String genero="";
+					
+					genero=lector.next();
+					
+				try 
+				{
+					
+					view.printMessage(modelo.requerimiento5(genero));
+					
 
-				case 4:
+					
+					
+				} 
+				catch (Exception e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				   break;
+				   
+				case 6:
+					modelo = new Modelo(2000); 
+					
+					modelo.cargarPeliculas();
+					
+					view.printMessage("cual es el genero del cual se desea hacer el ranking");
+					String genero1="";
+					genero1=lector.next();
+					
+					view.printMessage("escriba el numero de peliculas que desea conformar el ranking");
+					int numero1=0;
+					numero1=lector.nextInt();
+					
+					view.printMessage("desea organizarlas por 'AVERAGE'o 'COUNT'");
+					String orden1="";
+					orden1=lector.next();
+					
+					view.printMessage("desea que sea 'ascendente' o 'descendente' ");
+					String forma1="";
+					forma1=lector.next();
+					
+					
+				try 
+				{
+					
+					view.printMessage(modelo.requerimiento6(numero1, orden1, forma1,genero1));
+					
+
+					
+					
+				} 
+				catch (Exception e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				   break;
+					
+				case 7:
 					view.printMessage("--------- \n Hasta pronto !! \n---------"); 
 					lector.close();
 					fin = true;

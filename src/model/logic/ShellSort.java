@@ -7,7 +7,7 @@ public class ShellSort
 {
 	
 	
-	 public static void sort(Comparable[]  array)
+	 public static void sort(Comparable[]  array,String tipoOrden, String as_decendente)
 	 {
 	
 		 
@@ -20,8 +20,19 @@ public class ShellSort
 				 {
 					 for (int i = h; i < N; i++) 
 					 {
-						 for (int j = i; j >= h && array[j].compareTo(array[j-h])<0; j -= h)
-						 exch(array, j, j-h);
+						 if (as_decendente.equals("ascendente"))
+						 {
+							 for (int j = i; j >= h && less(array[j],array[j-h],tipoOrden); j -= h)
+							 exch(array, j, j-h);
+							 
+							
+						 }
+						 
+						 else 
+						 {
+							 for (int j = i; j >= h && !less(array[j],array[j-h],tipoOrden); j -= h)
+								 exch(array, j, j-h);
+						 }
 						 
 					 }
 						 h = h/3; 
@@ -31,6 +42,23 @@ public class ShellSort
 				 	 
 	 }
 	 
+	 private static boolean less(Comparable v, Comparable w, String tipoOrden)
+	 {
+		 boolean respuesta=false;
+		 Movies A= (Movies) v;
+		 Movies B= (Movies) w;
+		 
+		if (A.compareToRequerimiento(B,tipoOrden ) < 0)
+		{
+			respuesta=true;
+		}
+	 return respuesta;
+	 }
+	 
+
+	 
+
+
 	 private static void exch(Comparable[] a, int i, int j)
 	 {
 	 Comparable t = a[i];

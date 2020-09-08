@@ -27,6 +27,7 @@ public class Modelo {
 	private ListaEncadenada lista;
 	
 	
+	
 	/**
 	 * Constructor del modelo del mundo con capacidad predefinida
 	 */
@@ -118,7 +119,7 @@ public class Modelo {
 					String nombreEditor=palabra2[18];
 					
 					
-					Movies nuevaPelicula=new Movies(id ,0, genero,"","","","","","","",date,0,0,spokenLenguage,"","",title,votosPromedio,0,0,0,0,actor1,generoActor1,actor2,generoActor2,actor3,generoActor3,actor4,generoActor4,actor5,generoActor5,0,director,0,0,"",0,"","");
+					Movies nuevaPelicula=new Movies(id ,0, genero,"","","","","","","",date,0,0,spokenLenguage,"","",title,votosPromedio,numeroVotos,0,0,0,actor1,generoActor1,actor2,generoActor2,actor3,generoActor3,actor4,generoActor4,actor5,generoActor5,0,director,0,0,"",0,"","");
 					datos.addLast(nuevaPelicula);						
 					
 				}
@@ -236,7 +237,7 @@ public class Modelo {
 					String nombreEditor=palabra2[18];
 					
 					
-					Movies nuevaPelicula=new Movies(id ,0, genero,"","","","","","","",date,0,0,spokenLenguage,"","",title,votosPromedio,0,0,0,0,actor1,generoActor1,actor2,generoActor2,actor3,generoActor3,actor4,generoActor4,actor5,generoActor5,0,director,0,0,"",0,"","");
+					Movies nuevaPelicula=new Movies(id ,0, genero,"","","","","","","",date,0,0,spokenLenguage,"","",title,votosPromedio,numeroVotos,0,0,0,actor1,generoActor1,actor2,generoActor2,actor3,generoActor3,actor4,generoActor4,actor5,generoActor5,0,director,0,0,"",0,"","");
 				
 					if (contador==1)
 					{
@@ -292,7 +293,7 @@ public class Modelo {
 		}
 		
 		
-		ShellSort.sort(x);
+		ShellSort.sort(x,"AVERAGE","ascendente");
 		
 		for(int i=0;i<20;i++)
 		{
@@ -307,6 +308,12 @@ public class Modelo {
 		return respuesta;
 	}
 	
+	
+	
+	
+	
+	
+	
 	/**
 	 * Constructor del modelo del mundo con capacidad dada
 	 * @param tamano
@@ -316,43 +323,156 @@ public class Modelo {
 		datos = new ArregloDinamico(capacidad);
 	}
 	
-	public void probar() throws Exception
+	
+
+	
+	
+	public String requerimiento2(int numeroPeliculas, String tipoOrden, String as_decendente) throws Exception
 	{
+		String respuesta="las "+numeroPeliculas+" peliculas ordenadas por "+tipoOrden+" "+as_decendente+"mente son:\n";
 		
-		ListaEncadenada lista2 = new ListaEncadenada("perro1");
-		lista2.addLast("perro2");
-		lista2.addLast("perro3");
-		lista2.removeLast();
+		 Comparable[] comparable= new Comparable[2000];
+			
+			for (int i=0;i<2000;i++)
+			{
+				comparable[i]=datos.get(i+1);	
+			}
 		
-		
-		lista.addFirst("perro1");
-		lista.addLast("perro4");
-		lista.addLast("perro5");
-		
-		try 
+		if (numeroPeliculas>=10)
 		{
-			lista.insertElement("perro2", 2);
-			lista.giveLastElement();
-			lista.get(2);
-			lista.intercambiarInfo(1, 3);
-			lista.cambiarInfo(1, "perro1");
-			lista.cambiarInfo(3, "perro3");
-			lista.removePosition(2);
-		} 
-		catch (Exception e)
+			if(tipoOrden.equals("AVERAGE"))
+			{
+				ShellSort.sort(comparable,tipoOrden,as_decendente);
+				for(int i=0;i<numeroPeliculas && i<comparable.length;i++)
+				{
+					Movies actual=(Movies) comparable[i];
+					if(actual!=null) 
+					{
+					respuesta=respuesta+"Nombre: "+actual.darTitulo()+"\npromedio: "+actual.darPromedioVotos()+"\n\n";
+				
+					}
+				}
+			}
+			else if(tipoOrden.equals("COUNT"))
+			{
+				ShellSort.sort(comparable,tipoOrden,as_decendente);
+				for(int i=0;i<numeroPeliculas&& i<comparable.length;i++)
+				{
+					Movies actual=(Movies) comparable[i];
+					
+					if(actual!=null) 
+					{
+					respuesta=respuesta+"Nombre: "+actual.darTitulo()+" \nnumero de votos: "+actual.darNumeroVotos()+"\n\n";
+				
+					}
+				}
+			}
+			else
+			{
+				respuesta="no selecciono una forma adecuada de ranking";
+			}
+		}
+		else
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			respuesta="el numero de peliculas para hacer el ranking debe ser mayor o igual a 10";
 		}
 		
+		return respuesta;
+	}
+	
+	
+	public String requerimiento5(String genero) throws Exception
+	{
+		String respuestaPeliculas="las peliculas del genero "+genero+" son:\n";
+		double sumaCalificaciones=0;
+		int numeroPeliculas=0;
 		
-		lista.getFirtsElement();
-		lista.isPresent("perra3");
-		lista.removeFirst();
-		lista.removeLast();
+		for(int i=1;i<=datos.size();i++)
+		{
+			Movies actual=(Movies) datos.get(i);
+			if(actual.darGenero().equals(genero))
+			{
+				respuestaPeliculas=respuestaPeliculas+actual.darTitulo()+"\n";
+				sumaCalificaciones=sumaCalificaciones+actual.darPromedioVotos();
+				numeroPeliculas++;
+				
+				
+			}
+		}
+			
+		double promedio=sumaCalificaciones/numeroPeliculas;
 		
+		return respuestaPeliculas+ "\n numero de peliculas: "+numeroPeliculas+"\n promedio de peliculas del genero: "+promedio;
 		
 	}
+
+	public String requerimiento6(int numeroPeliculas, String tipoOrden, String as_decendente, String genero) throws Exception
+	{
+		String respuesta="las "+numeroPeliculas+" peliculas ordenadas por "+tipoOrden+" "+as_decendente+"mente del genero " +genero+ " son:\n";
+		
+		ArregloDinamico provision= new ArregloDinamico(2000);
+		int numeroGenero=0;
+		
+		for(int i=1;i<=datos.size();i++)
+		{
+			Movies actual=(Movies) datos.get(i);
+			if(actual.darGenero().equals(genero))
+			{
+				provision.addLast(actual);
+				numeroGenero++;	
+			}
+		}
+		
+		 Comparable[] comparable= new Comparable[numeroGenero];
+			
+			for (int i=0;i<provision.size();i++)
+			{
+				comparable[i]=provision.get(i+1);
+					
+			}
+		
+		if (numeroPeliculas>=10)
+		{
+			if(tipoOrden.equals("AVERAGE"))
+			{
+				ShellSort.sort(comparable,tipoOrden,as_decendente);
+				for(int i=0;i<numeroPeliculas&& i<comparable.length;i++)
+				{
+					Movies actual=(Movies) comparable[i];
+					if(actual!=null) 
+					{
+						respuesta=respuesta+"Nombre: "+actual.darTitulo()+"\npromedio: "+actual.darPromedioVotos()+"\n\n";
+						
+					}
+				}
+			}
+			else if(tipoOrden.equals("COUNT"))
+			{
+				ShellSort.sort(comparable,tipoOrden,as_decendente);
+				for(int i=0;i<numeroPeliculas&& i<comparable.length;i++)
+				{
+					Movies actual=(Movies) comparable[i];
+					if(actual!=null) 
+					{
+						respuesta=respuesta+"Nombre: "+actual.darTitulo()+" \nnumero de votos: "+actual.darNumeroVotos()+"\n\n";
+						
+					}
+				}
+			}
+			else
+			{
+				respuesta="no selecciono una forma adecuada de ranking";
+			}
+		}
+		else
+		{
+			respuesta="el numero de peliculas para hacer el ranking debe ser mayor o igual a 10";
+		}
+		
+		return respuesta;
+	}
+	
+
 
 
 }
