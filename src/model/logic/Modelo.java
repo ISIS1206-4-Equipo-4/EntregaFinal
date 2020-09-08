@@ -365,26 +365,26 @@ public class Modelo {
 	
 	public String conocerActor(String pActor) throws Exception
 	{
-		String rta = "Informacion del actor " + pActor;
-		int cont = 0;
+		String rta = "Información de " + pActor;
+		int pelis = 0;
 		int suma = 0;
-		int promedio = 0; 
-		for(int i= 0; i < TAMANO; i++)
+		int prom = 0; 
+		for(int i= 0; i < datos.size() ; i++)
 		{
-			Movies pelicula = (Movies) datos.get(i+1);
-			if(pelicula.darActor1().compareTo(pActor) == 0)
+			Movies peli = (Movies) datos.get(i);
+			if(peli.darActor1().compareTo(pActor) == 0 || peli.darActor2().compareTo(pActor) == 0 || peli.darActor3().compareTo(pActor) == 0 || peli.darActor4().compareTo(pActor) == 0 || peli.darActor5().compareTo(pActor) == 0)
 			{
-				rta = rta + "\nTitulo: " + pelicula.darTitulo() + pelicula.darId()+" \nGenero: "+pelicula.darGenero()+" \nDia de Lanzamiento: " +pelicula.darDate()+" \nPromedio votos: "+pelicula.darPromedioVotos()+" \nActor1: "+pelicula.darActor1()+" \nActor2: "+pelicula.darActor2()+" \nActor3: "+pelicula.darActor3()+" \nActor4: "+pelicula.darActor4()+" \nActor5: "+pelicula.darActor5();
-				cont++;
-				suma += pelicula.darPromedioVotos();
+				rta = rta + "\nTitulo: " + peli.darTitulo() + "\nId: " + peli.darId();
+				pelis++;
+				suma += peli.darPromedioVotos();
 			}
 		}
-		if (cont != 0) 
+		if (pelis != 0) 
 		{
-			promedio = suma/cont;	
+			prom = suma/pelis;	
 		}
 		
-		rta += "\nNumero de peliculas: " + cont + "\nPromedio: " + promedio;
+		rta += "\nNumero de peliculas en las que ha participado: " + pelis + "\nPromedio de votos en las películas: " + prom;
 		
 		return rta; 
 	}
