@@ -371,7 +371,7 @@ public class Modelo {
 		int prom = 0; 
 		for(int i= 0; i < datos.size() ; i++)
 		{
-			Movies peli = (Movies) datos.get(i);
+			Movies peli = (Movies) datos.get(i+1);
 			if(peli.darActor1().compareTo(pActor) == 0 || peli.darActor2().compareTo(pActor) == 0 || peli.darActor3().compareTo(pActor) == 0 || peli.darActor4().compareTo(pActor) == 0 || peli.darActor5().compareTo(pActor) == 0)
 			{
 				rta = rta + "\nTitulo: " + peli.darTitulo() + "\nId: " + peli.darId();
