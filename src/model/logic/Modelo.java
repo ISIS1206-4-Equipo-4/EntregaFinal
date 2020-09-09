@@ -204,12 +204,30 @@ public class Modelo {
 	{
 		String respuesta="las "+numeroPeliculas+" peliculas ordenadas por "+tipoOrden+" "+as_decendente+"mente son:\n";
 		
-		 Comparable[] comparable= new Comparable[2000];
-			
-			for (int i=0;i<2000;i++)
+		ArregloDinamico provision= new ArregloDinamico(datos.size());
+		int numeroGenero=0;
+		
+		for(int i=1;i<=datos.size();i++)
+		{
+			Movies actual=(Movies) datos.get(i);
+			if(actual.darPromedioVotos()!=0 )
 			{
-				comparable[i]=datos.get(i+1);	
+				provision.addLast(actual);
+				numeroGenero++;	
 			}
+		}
+		
+		 Comparable[] comparable= new Comparable[numeroGenero];
+		
+			for (int i=0;i<provision.size();i++)
+			{
+				
+				comparable[i]=provision.get(i+1);
+				
+				
+					
+			}
+		 
 		
 		if (numeroPeliculas>=10)
 		{
@@ -398,13 +416,13 @@ public class Modelo {
 	{
 		String respuesta="las "+numeroPeliculas+" peliculas ordenadas por "+tipoOrden+" "+as_decendente+"mente del genero " +genero+ " son:\n";
 		
-		ArregloDinamico provision= new ArregloDinamico(2000);
+		ArregloDinamico provision= new ArregloDinamico(datos.size());
 		int numeroGenero=0;
 		
 		for(int i=1;i<=datos.size();i++)
 		{
 			Movies actual=(Movies) datos.get(i);
-			if(actual.darGenero().equals(genero))
+			if(actual.darGenero().equals(genero)&&actual.darPromedioVotos()!=0 )
 			{
 				provision.addLast(actual);
 				numeroGenero++;	
@@ -412,10 +430,13 @@ public class Modelo {
 		}
 		
 		 Comparable[] comparable= new Comparable[numeroGenero];
-			
+		
 			for (int i=0;i<provision.size();i++)
 			{
+				
 				comparable[i]=provision.get(i+1);
+				
+				
 					
 			}
 		
